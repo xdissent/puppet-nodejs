@@ -20,7 +20,9 @@ describe "nodejs" do
     should contain_file(versions).with_ensure("directory")
 
     should contain_file("/test/boxen/env.d/nodenv.sh").with_ensure("absent")
-    should contain_boxen__env_script("nodejs").with_source("puppet:///modules/nodejs/nodenv.sh")
+    should contain_boxen__env_script("nodejs.sh").with_source("puppet:///modules/nodejs/nodenv.sh")
+    should contain_file("/test/boxen/env.d/nodenv.fish").with_ensure("absent")
+    should contain_boxen__env_script("nodejs.fish").with_source("puppet:///modules/nodejs/nodenv.fish")
   end
 
   context "Linux" do

@@ -14,7 +14,7 @@ class nodejs::params {
       $nodenv_root = '/usr/local/share/nodenv'
     }
   }
-  
+
   $nodenv_repo = 'wfarr/nodenv'
   $nodenv_version = 'v0.3.3'
 
