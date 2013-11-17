@@ -12,6 +12,7 @@ class nodejs::params {
     default: {
       $nodenv_user = 'root'
       $nodenv_root = '/usr/local/share/nodenv'
+      $nodenv_repo = 'wfarr/nodenv'
     }
   }
 

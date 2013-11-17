@@ -8,6 +8,7 @@ class nodejs(
   $nodenv_root    = $nodejs::params::nodenv_root,
   $nodenv_user    = $nodejs::params::nodenv_user,
   $nodenv_version = $nodejs::params::nodenv_version,
+  $nodenv_repo    = $nodejs::params::nodenv_repo,
 
   $nvm_root       = $nodejs::params::nvm_root
 ) inherits nodejs::params {
@@ -30,7 +31,7 @@ class nodejs(
   repository { $nodenv_root:
     ensure => $nodenv_version,
     force  => true,
-    source => 'wfarr/nodenv',
+    source => $nodenv_repo,
     user   => $nodenv_user
   }
 
