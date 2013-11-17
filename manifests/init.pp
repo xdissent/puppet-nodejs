@@ -21,9 +21,18 @@ class nodejs(
       ensure => absent,
     }
 
+    file { "${boxen::config::envdir}/nodenv.fish":
+      ensure => absent,
+    }
+
     boxen::env_script { 'nodejs':
       priority => 'higher',
       source   => 'puppet:///modules/nodejs/nodenv.sh',
+    }
+
+    boxen::env_script { 'nodejs':
+      priority => 'higher',
+      source   => 'puppet:///modules/nodejs/nodenv.fish',
     }
   }
 
