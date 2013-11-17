@@ -25,12 +25,12 @@ class nodejs(
       ensure => absent,
     }
 
-    boxen::env_script { 'nodejs':
+    boxen::env_script { 'nodejs.sh':
       priority => 'higher',
       source   => 'puppet:///modules/nodejs/nodenv.sh',
     }
 
-    boxen::env_script { 'nodejs':
+    boxen::env_script { 'nodejs.fish':
       priority => 'higher',
       source   => 'puppet:///modules/nodejs/nodenv.fish',
     }
