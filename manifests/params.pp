@@ -12,10 +12,10 @@ class nodejs::params {
     default: {
       $nodenv_user = 'root'
       $nodenv_root = '/usr/local/share/nodenv'
-      $nodenv_repo = 'wfarr/nodenv'
     }
   }
-
+  
+  $nodenv_repo = 'wfarr/nodenv'
   $nodenv_version = 'v0.3.3'
 
   # Deprecated variables
