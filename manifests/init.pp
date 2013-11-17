@@ -27,11 +27,15 @@ class nodejs(
     }
 
     boxen::env_script { 'nodejs.sh':
+      scriptname => 'nodejs',
+      extension => 'sh',
       priority => 'higher',
       source   => 'puppet:///modules/nodejs/nodenv.sh',
     }
 
     boxen::env_script { 'nodejs.fish':
+      scriptname => 'nodejs',
+      extension => 'fish',
       priority => 'higher',
       source   => 'puppet:///modules/nodejs/nodenv.fish',
     }
