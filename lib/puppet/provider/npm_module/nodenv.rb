@@ -75,7 +75,7 @@ Puppet::Type.type(:npm_module).provide :nodenv do
 
   def node_version_long
     if SHORT_VERSION =~ @resource[:node_version]
-      @resource[:node_version] + '.0'
+      @resource[:node_version] + '.999999'
     else
       @resource[:node_version]
     end
@@ -88,7 +88,7 @@ Puppet::Type.type(:npm_module).provide :nodenv do
         "NODENV_VERSION" => @resource[:node_version]
       },
       #Npm versions greater than 0.10.26 return 1 when no dependencies are returned
-      :failonfail         => SemVer.new(node_version_long) > SemVer.new('0.10.26'),
+      :failonfail         => SemVer.new(node_version_long) < SemVer.new('0.10.26'),
       :uid                => @resource[:user]
     }
   end
