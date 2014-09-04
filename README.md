@@ -1,6 +1,6 @@
 # nodejs Puppet Module for Boxen
 
-[![Build Status](https://travis-ci.org/boxen/puppet-nodejs.png?branch=master)](https://travis-ci.org/boxen/puppet-nodejs)
+[![Build Status](https://travis-ci.org/boxen/puppet-nodejs.svg?branch=master)](https://travis-ci.org/boxen/puppet-nodejs)
 
 Using nodenv for nodejs version management,
 automates installation and configuration of nodejs versions.
@@ -13,7 +13,10 @@ include nodejs::v0_10
 include nodejs::v0_8_8
 
 # install any arbitrary nodejs version
-nodejs { 'v0.10.1': }
+nodejs::version { 'v0.10.1': }
+
+# set the global nodejs version
+class { 'nodejs::global': version => 'v0.10.1' }
 
 # install some npm modules
 nodejs::module { 'bower':
@@ -28,4 +31,4 @@ nodejs::module { 'bower':
 * stdlib >= 3.0.0
 
 ##### Latest supported Node.js version
-v0.10.26
+v0.10.31
