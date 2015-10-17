@@ -1,57 +1,43 @@
-# Public: Install nodenv so nodejs versions can be installed
+# Class: nodejs
 #
-# Usage:
+# This module installs a full nodenv-driven node stack
 #
-#   include nodejs
-
 class nodejs(
-  $nodenv_root    = $nodejs::params::nodenv_root,
-  $nodenv_user    = $nodejs::params::nodenv_user,
-  $nodenv_version = $nodejs::params::nodenv_version,
-  $nodenv_repo    = $nodejs::params::nodenv_repo,
-
-  $nvm_root       = $nodejs::params::nvm_root
-) inherits nodejs::params {
-  require nodejs::nvm
-  include nodejs::rehash
-
+  $provider = $nodejs::provider,
+  $prefix   = $nodejs::prefix,
+  $user     = $nodejs::user,
+) {
   if $::osfamily == 'Darwin' {
     include boxen::config
+  }
 
-    file { "${boxen::config::envdir}/nodenv.sh":
-      ensure => absent,
-    }
+  include nodejs::build
 
-    file { "${boxen::config::envdir}/nodenv.fish":
-      ensure => absent,
-    }
+  $provider_class = "nodejs::${provider}"
+  include $provider_class
 
+  if $::osfamily == 'Darwin' {
     boxen::env_script { 'nodejs.sh':
       scriptname => 'nodejs',
       extension  => 'sh',
       priority   => 'higher',
-      source     => 'puppet:///modules/nodejs/nodenv.sh',
+      content    => template('nodejs/nodejs.sh'),
     }
-
     boxen::env_script { 'nodejs.fish':
       scriptname => 'nodejs',
       extension  => 'fish',
       priority   => 'higher',
-      source     => 'puppet:///modules/nodejs/nodenv.fish',
+      content    => template('nodejs/nodejs.fish'),
     }
   }
 
-  repository { $nodenv_root:
-    ensure => $nodenv_version,
-    force  => true,
-    source => $nodenv_repo,
-    user   => $nodenv_user
+  file { '/opt/nodes':
+    ensure => directory,
+    owner  => $user,
   }
 
-  file { "${nodejs::nodenv_root}/versions":
-    ensure  => directory,
-    owner   => $nodenv_user,
-    mode    => '0755',
-    require => Repository[$nodenv_root]
-  }
+  Class['nodejs::build'] ->
+    Class[$provider_class] ->
+    Nodejs <| |> ->
+    Npm_module <| |>
 }
