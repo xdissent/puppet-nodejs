@@ -4,9 +4,9 @@ GITHUBTARBALL
     autoconf (1.0.0)
 
 GITHUBTARBALL
-  remote: boxen/puppet-boxen
+  remote: xdissent/puppet-boxen
   specs:
-    boxen (3.4.2)
+    boxen (3.11.0)
 
 GITHUBTARBALL
   remote: boxen/puppet-gcc
@@ -45,7 +45,7 @@ GITHUBTARBALL
 
 DEPENDENCIES
   autoconf (= 1.0.0)
-  boxen (= 3.4.2)
+  boxen (= 3.11.0)
   gcc (= 1.0.0)
   homebrew (= 1.1.2)
   java (= 1.2.0)
